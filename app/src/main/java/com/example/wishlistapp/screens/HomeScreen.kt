@@ -22,32 +22,30 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.wishlistapp.R
 import com.example.wishlistapp.data.DummyWish
+import com.example.wishlistapp.navigation.ScreenRoute
 import com.example.wishlistapp.ui_components.AppBar
 import com.example.wishlistapp.ui_components.WishItem
+import com.example.wishlistapp.viewmodel.WishViewModel
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    navController: NavController,
+    viewModel: WishViewModel
+) {
     val context = LocalContext.current
     Scaffold(
-        modifier = Modifier.padding(WindowInsets.statusBars.asPaddingValues()),
         topBar = {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(80.dp),
-                verticalArrangement = Arrangement.Center
-            ) {
                 AppBar(title = stringResource(id = R.string.wish_list))
-            }
         },
         floatingActionButton = {
             FloatingActionButton(
                 modifier = Modifier.padding(all = 20.dp),
                 contentColor = Color.White,
                 containerColor = Color.Black,
-                onClick = { /*TODO*/ }
+                onClick = { navController.navigate(ScreenRoute.AddScreenRoute.route) }
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,

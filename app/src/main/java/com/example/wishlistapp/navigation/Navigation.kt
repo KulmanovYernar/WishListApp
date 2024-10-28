@@ -13,7 +13,7 @@ import com.example.wishlistapp.viewmodel.WishViewModel
 
 @Composable
 fun Navigation(
-    viewmodel: WishViewModel = viewModel(),
+    viewModel: WishViewModel = viewModel(),
     navController: NavHostController = rememberNavController(),
 ) {
     NavHost(
@@ -21,13 +21,16 @@ fun Navigation(
         startDestination = ScreenRoute.HomeScreenRoute.route
     ) {
         composable(route = ScreenRoute.HomeScreenRoute.route) {
-            HomeScreen()
+            HomeScreen(
+                navController = navController,
+                viewModel = viewModel
+            )
         }
 
         composable(route = ScreenRoute.AddScreenRoute.route) {
             AddEditDetailScreen(
                 navController = navController,
-                viewModel = viewmodel,
+                viewModel = viewModel,
                 id = 0
             )
         }
