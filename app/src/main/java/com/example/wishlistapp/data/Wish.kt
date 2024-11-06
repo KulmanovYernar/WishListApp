@@ -15,20 +15,3 @@ data class Wish(
     @ColumnInfo(name = "wish-desc")
     val description: String = ""
 )
-
-object DummyWish {
-    val wishList = listOf(
-        Wish(
-            title = "asdasdas",
-            description = "asdasdasdsa"
-        ),
-        Wish(
-            title = "342343242",
-            description = " bvcxvcxvxcv"
-        ),
-        Wish(
-            title = "dffsgsf",
-            description = "tg34r2"
-        )
-    )
-}

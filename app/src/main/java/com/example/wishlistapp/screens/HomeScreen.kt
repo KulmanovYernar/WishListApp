@@ -17,6 +17,7 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -36,6 +37,9 @@ fun HomeScreen(
     viewModel: WishViewModel
 ) {
     val context = LocalContext.current
+    val wishList = viewModel.allWishes.collectAsState(initial = listOf())
+
+
     Scaffold(
         topBar = {
                 AppBar(title = stringResource(id = R.string.wish_list))
@@ -59,7 +63,7 @@ fun HomeScreen(
                 .fillMaxSize()
                 .padding(it)
         ) {
-            items(DummyWish.wishList) { wish ->
+            items(wishList.value) { wish ->
                 WishItem(wish = wish) {
 
                 }
