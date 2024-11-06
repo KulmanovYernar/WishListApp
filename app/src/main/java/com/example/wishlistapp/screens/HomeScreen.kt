@@ -70,7 +70,7 @@ fun HomeScreen(
             items(wishList.value) { wish ->
                 val dismissState = rememberSwipeToDismissBoxState(
                     confirmValueChange = {
-                        if (it == SwipeToDismissBoxValue.StartToEnd || it == SwipeToDismissBoxValue.EndToStart) {
+                        if (it == SwipeToDismissBoxValue.EndToStart) {
                             viewModel.deleteWish(wish)
                         }
                         true
