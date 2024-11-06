@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,6 +25,7 @@ import com.example.wishlistapp.data.Wish
 import com.example.wishlistapp.ui_components.AppBar
 import com.example.wishlistapp.ui_components.WishTextField
 import com.example.wishlistapp.viewmodel.WishViewModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun AddEditDetailScreen(
@@ -38,6 +40,7 @@ fun AddEditDetailScreen(
     val scope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
     Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = {
             AppBar(title = if (id != 0L) "Update wish" else "Add Wish") {
                 navController.navigateUp()
@@ -86,6 +89,10 @@ fun AddEditDetailScreen(
                     }
                 } else {
                     snackMessage.value = "Enter a field to create a wish"
+                }
+                scope.launch {
+                    snackbarHostState.showSnackbar(snackMessage.value)
+                    navController.navigateUp()
                 }
             }) {
                 Text(
