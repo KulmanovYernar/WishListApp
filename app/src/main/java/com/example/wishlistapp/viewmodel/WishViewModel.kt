@@ -54,10 +54,9 @@ class WishViewModel(
         }
     }
 
-    fun getWishById(id: Long){
-        viewModelScope.launch(Dispatchers.IO) {
-            wishRepository.getWishById(id = id)
-        }
+    fun getWishById(id: Long): Flow<Wish>{
+        val wish = wishRepository.getWishById(id = id)
+        return wish
     }
 
 

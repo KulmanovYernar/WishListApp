@@ -11,6 +11,7 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -39,6 +40,15 @@ fun AddEditDetailScreen(
 
     val scope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
+    if(id != 0L){
+        val wish = viewModel.getWishById(id).collectAsState(initial = Wish())
+        viewModel.wishTitleState = wish.value.title
+        viewModel.wishDescriptionState = wish.value.description
+    }else{
+        val wish = Wish()
+        viewModel.wishTitleState = ""
+        viewModel.wishDescriptionState = ""
+    }
     Scaffold(
         snackbarHost = { SnackbarHost(snackbarHostState) },
         topBar = {
@@ -73,6 +83,7 @@ fun AddEditDetailScreen(
                     if (id != 0L) {
                         viewModel.updateWish(
                             Wish(
+                                id = id,
                                 title = viewModel.wishTitleState.trim(),
                                 description = viewModel.wishDescriptionState.trim()
                             )
@@ -91,7 +102,7 @@ fun AddEditDetailScreen(
                     snackMessage.value = "Enter a field to create a wish"
                 }
                 scope.launch {
-                    snackbarHostState.showSnackbar(snackMessage.value)
+//                    snackbarHostState.showSnackbar(snackMessage.value)
                     navController.navigateUp()
                 }
             }) {
