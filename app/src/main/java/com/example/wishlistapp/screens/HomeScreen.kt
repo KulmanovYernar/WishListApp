@@ -25,7 +25,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.wishlistapp.R
-import com.example.wishlistapp.data.DummyWish
 import com.example.wishlistapp.navigation.ScreenRoute
 import com.example.wishlistapp.ui_components.AppBar
 import com.example.wishlistapp.ui_components.WishItem
